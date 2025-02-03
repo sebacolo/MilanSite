@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carica Soldi</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://assets-eu-01.kc-usercontent.com/1293c890-579f-01b7-8480-902cca7de55e/2a1cadc2-f524-46f3-9566-47e0aebaf6be/SanSiro-Stadio-3.jpg?auto=format');
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            padding: 50px 0;
+        }
+
+        h1 {
+            color: #c8102e;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px #000;
+            animation: fadeIn 1.5s;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            max-width: 600px;
+            margin-top: 50px;
+        }
+
+            .container label, .container input {
+                display: block;
+                margin: 10px 0;
+                color: #c8102e;
+            }
+
+        .form-control {
+            border-radius: 10px;
+        }
+
+        .container input[type="submit"] {
+            background-color: #c8102e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            width: 100%;
+        }
+
+            .container input[type="submit"]:hover {
+                background-color: #8b0000;
+                transform: scale(1.1);
+            }
+
+        .link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+            .link a {
+                color: #c8102e;
+                text-decoration: none;
+                font-size: 1.2em;
+                transition: color 0.3s;
+            }
+
+                .link a:hover {
+                    color: #8b0000;
+                }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+    <script>
+            function loadCredit() {
+                const credit = localStorage.getItem('credit') || 0;
+                document.getElementById('credit').innerText = `Credito: €${credit}`;
+            }
+
+            function addCredit(event) {
+                event.preventDefault();
+                const amount = parseFloat(document.getElementById('amount').value);
+                let credit = parseFloat(localStorage.getItem('credit') || 0);
+                credit += amount;
+                localStorage.setItem('credit', credit);
+                document.getElementById('credit').innerText = `Credito: €${credit}`;
+                alert('Credito caricato con successo!');
+            }
+    </script>
+</head>
+<body onload="loadCredit()">
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="container">
+            <h1 class="my-4 text-center">Carica Soldi</h1>
+            <p id="credit" class="text-center">Credito: €0</p>
+            <div class="bg-dark p-4 rounded shadow">
+                <h2 class="text-white">Dettagli del Caricamento</h2>
+                <form onsubmit="addCredit(event)">
+                    <div class="form-group">
+                        <label for="name" class="text-white">Nome:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="text-white">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount" class="text-white">Importo da Caricare:</label>
+                        <input type="number" id="amount" name="amount" class="form-control" min="10" required>
+                    </div>
+                    <input type="submit" value="Carica Soldi" class="btn btn-danger btn-block">
+                </form>
+            </div>
+            <div class="link my-4">
+                <button class="btn btn-secondary" onclick="window.location.href='page.html'">Torna alla Home</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

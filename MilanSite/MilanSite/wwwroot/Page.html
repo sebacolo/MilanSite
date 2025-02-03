@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra Biglietti Stadio AC Milan</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #333333;
+            font-family: Arial, sans-serif;
+            padding-top: 50px;
+            transition: background-color 0.5s;
+        }
+
+        h1 {
+            color: #d40000;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            transition: color 0.5s;
+        }
+
+        p {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 15px;
+            color: #333333;
+        }
+
+        .form-container {
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.5s;
+        }
+
+            .form-container:hover {
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            }
+
+        .button {
+            background-color: #d40000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 20px;
+        }
+
+            .button:hover {
+                background-color: darkred;
+                transform: scale(1.1);
+            }
+
+        .jersey-img {
+            width: 250px;
+            height: auto;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #d40000;
+            margin: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #d40000;
+            color: white;
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        .map {
+            margin-top: 30px;
+        }
+    </style>
+    <script>
+        function loadCredit() {
+            const credit = localStorage.getItem('credit') || 0;
+            document.getElementById('credit').innerText = `Credito: €${credit}`;
+        }
+    </script>
+</head>
+<body onload="loadCredit()">
+    <div class="container">
+        <h1 class="text-center mb-4">ACQUISTO BIGLIETTI STADIO AC MILAN</h1>
+        <div class="text-center mb-4">
+            <img src="https://download.logo.wine/logo/A.C._Milan/A.C._Milan-Logo.wine.png" alt="AC Milan Logo" class="mx-auto" width="200">
+        </div>
+
+        <p class="text-center">Benvenuti nel sito ufficiale dell'AC MILAN</p>
+        <p id="credit" class="text-center mb-4">Credito: €0</p>
+
+        <div class="form-container mx-auto mb-4 p-4">
+            <form action="purchase_tickets.html" method="get">
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-danger btn-block">Submit</button>
+            </form>
+        </div>
+
+        <div class="text-center my-4">
+            <a href="https://www.acmilan.com" target="_blank" class="btn btn-primary">Visita il sito ufficiale dell'AC Milan</a>
+        </div>
+
+        <div class="map my-4 text-center">
+            <h2>Stadio San Siro</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.142040423631!2d9.12166131555614!3d45.47810797910161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c1b1e2b1e1b1%3A0x9e8b1e2b1e2b1e2b!2sSan%20Siro%20Stadium!5e0!3m2!1sen!2sit!4v1634567890123!5m2!1sen!2sit"
+                    width="100%"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy">
+            </iframe>
+        </div>
+
+        <div class="merchandise my-4">
+            <h2 class="text-center">Acquista le Maglie Ufficiali</h2>
+            <div class="d-flex flex-column align-items-center">
+                <div class="m-2">
+                    <img src="https://store.acmilan.com/cdn/shop/files/774949-A81_01_2738c450-dc7c-49a3-a94f-92f287d6bd98.jpg?v=1716443193" alt="Maglia Home AC Milan" class="img-fluid jersey-img">
+                    <p>Maglia Home AC Milan - €95</p>
+                    <form action="purchase.html" method="get">
+                        <input type="hidden" name="jersey" value="home">
+                        <input type="submit" value="Compra Ora" class="btn btn-danger btn-sm btn-block">
+                    </form>
+                </div>
+                <div class="m-2">
+                    <img src="https://outletdelcalcio.eu/cdn/shop/files/1_29354d4d-6957-45a5-86f8-3633735c3ffd.png?v=1722337886" alt="Maglia Away AC Milan" class="img-fluid jersey-img">
+                    <p>Maglia Away AC Milan - €95</p>
+                    <form action="purchase.html" method="get">
+                        <input type="hidden" name="jersey" value="away">
+                        <input type="submit" value="Compra Ora" class="btn btn-danger btn-sm btn-block">
+                    </form>
+                </div>
+                <div class="m-2">
+                    <img src="https://store.acmilan.com/cdn/shop/files/775028-B55_01_d8f697b2-2ed6-47b0-861f-fec7cbb26b28_600x600_crop_center.jpg?v=1724305683" alt="Maglia Third AC Milan" class="img-fluid jersey-img">
+                    <p>Maglia Third AC Milan - €80</p>
+                    <form action="purchase.html" method="get">
+                        <input type="hidden" name="jersey" value="third">
+                        <input type="submit" value="Compra Ora" class="btn btn-danger btn-sm btn-block">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center my-4">
+            <a href="caricoCredito.html" class="btn btn-primary btn-sm btn-block">Carica Soldi</a>
+        </div>
+
+        <div class="text-center my-4">
+            <button class="btn btn-danger btn-sm btn-block" onclick="window.location.href='trofei.html'">Visualizza Trofei</button>
+            <button class="btn btn-secondary btn-sm btn-block" onclick="window.location.href='purchaseTicket.html'">Acquista Biglietti</button>
+        </div>
+
+        <div class="text-center my-4">
+            <button class="btn btn-secondary btn-sm btn-block" onclick="window.location.href='formazione.html'">Formazione</button>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

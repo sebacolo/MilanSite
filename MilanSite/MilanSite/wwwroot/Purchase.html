@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Acquisto Magliette AC Milan</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            transition: background-color 0.5s;
+            background-image: url('https://assets-eu-01.kc-usercontent.com/1293c890-579f-01b7-8480-902cca7de55e/2a1cadc2-f524-46f3-9566-47e0aebaf6be/SanSiro-Stadio-3.jpg?auto=format');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            color: #c8102e;
+            transition: color 0.5s;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        p {
+            font-size: 18px;
+            transition: color 0.5s;
+            color: #fff;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            text-align: left;
+            transition: box-shadow 0.5s;
+        }
+
+            .container:hover {
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            }
+
+            .container img {
+                width: 150px;
+                margin: 10px;
+                transition: transform 0.3s;
+            }
+
+                .container img:hover {
+                    transform: scale(1.1);
+                }
+
+            .container label, .container select, .container input {
+                display: block;
+                margin: 10px 0;
+                color: #c8102e;
+            }
+
+                .container input[type="submit"] {
+                    background-color: #c8102e;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    transition: background-color 0.3s, transform 0.3s;
+                }
+
+                    .container input[type="submit"]:hover {
+                        background-color: #8b0000;
+                        transform: scale(1.1);
+                    }
+
+        .link {
+            margin-top: 20px;
+            text-align: center;
+            transition: color 0.3s;
+        }
+
+            .link a {
+                color: #c8102e;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+                .link a:hover {
+                    color: #8b0000;
+                }
+
+        .button {
+            background-color: #c8102e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 20px;
+        }
+
+            .button:hover {
+                background-color: #8b0000;
+                transform: scale(1.1);
+            }
+    </style>
+    <script>
+            function loadCredit() {
+                const credit = localStorage.getItem('credit') || 0;
+                document.getElementById('credit').innerText = `Credito: €${credit}`;
+            }
+
+            function purchaseJersey(event) {
+                event.preventDefault();
+                const jersey = document.getElementById('jersey').value;
+                const quantity = parseInt(document.getElementById('quantity').value);
+                let costPerJersey = 0;
+
+                if (jersey === 'home' || jersey === 'away') {
+                    costPerJersey = 95;
+                } else if (jersey === 'third') {
+                    costPerJersey = 80;
+                }
+
+                const totalCost = quantity * costPerJersey;
+                let credit = parseFloat(localStorage.getItem('credit') || 0);
+
+                if (credit >= totalCost) {
+                    credit -= totalCost;
+                    localStorage.setItem('credit', credit);
+                    alert('Acquisto completato con successo!');
+                } else {
+                    alert('Credito insufficiente. Si prega di caricare più soldi.');
+                }
+                document.getElementById('credit').innerText = `Credito: €${credit}`;
+            }
+    </script>
+</head>
+<body onload="loadCredit()">
+    <h1>Acquisto ufficiale magliette AC MILAN</h1>
+    <p id="credit">Credito: €0</p>
+    <div class="container">
+        <h2 class="text-white">Dettagli dell'Ordine</h2>
+        <form onsubmit="purchaseJersey(event)">
+            <div class="form-group">
+                <label for="name" class="text-white">Nome:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email" class="text-white">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="address" class="text-white">Indirizzo:</label>
+                <input type="text" id="address" name="address" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="jersey" class="text-white">Maglietta:</label>
+                <select id="jersey" name="jersey" class="form-control">
+                    <option value="home">Maglia Home AC Milan - €95</option>
+                    <option value="away">Maglia Away AC Milan - €95</option>
+                    <option value="third">Maglia Third AC Milan - €80</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="player" class="text-white">Giocatore:</label>
+                <select id="player" name="player" class="form-control">
+                    <option value="Leao">Leao</option>
+                    <option value="Reijnders">Reijnders</option>
+                    <option value="Morata">Morata</option>
+                    <option value="Theo">Theo</option>
+                    <option value="Musah">Musah</option>
+                    <option value="Tomori">Tomori</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity" class="text-white">Quantità:</label>
+                <input type="number" id="quantity" name="quantity" class="form-control" min="1" max="10" required>
+            </div>
+            <input type="submit" value="Conferma Acquisto" class="btn btn-danger btn-block">
+        </form>
+    </div>
+    <div class="link my-4">
+        <button class="btn btn-secondary" onclick="window.location.href='page.html'">Torna alla Home</button>
+        <button class="btn btn-primary" onclick="window.location.href='caricoCredito.html'">Carica Credito</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

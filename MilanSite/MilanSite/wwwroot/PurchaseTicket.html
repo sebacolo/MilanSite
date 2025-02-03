@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acquisto Biglietti Partite</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://assets-eu-01.kc-usercontent.com/1293c890-579f-01b7-8480-902cca7de55e/2a1cadc2-f524-46f3-9566-47e0aebaf6be/SanSiro-Stadio-3.jpg?auto=format');
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            padding: 50px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        h1 {
+            color: #c8102e;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px #000;
+            margin-bottom: 30px;
+            animation: fadeIn 1.5s;
+        }
+
+        p {
+            font-size: 1.2em;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            text-align: left;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+            .container label, .container select, .container input {
+                display: block;
+                margin: 10px 0;
+                color: #c8102e;
+            }
+
+                .container input[type="submit"] {
+                    background-color: #c8102e;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    transition: background-color 0.3s, transform 0.3s;
+                    width: 100%;
+                }
+
+                    .container input[type="submit"]:hover {
+                        background-color: #8b0000;
+                        transform: scale(1.1);
+                    }
+
+        .link {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+            .link a {
+                color: #c8102e;
+                text-decoration: none;
+                font-size: 1.2em;
+                transition: color 0.3s;
+            }
+
+                .link a:hover {
+                    color: #8b0000;
+                }
+
+        .button {
+            background-color: #c8102e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+            .button:hover {
+                background-color: #8b0000;
+                transform: scale(1.1);
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+    <script>
+            function loadCredit() {
+                const credit = localStorage.getItem('credit') || 0;
+                document.getElementById('credit').innerText = `Credito: €${credit}`;
+            }
+
+            function purchaseTicket(event) {
+                event.preventDefault();
+                const quantity = parseInt(document.getElementById('quantity').value);
+                const costPerTicket = 50;
+                const totalCost = quantity * costPerTicket;
+
+                let credit = parseFloat(localStorage.getItem('credit') || 0);
+                if (credit >= totalCost) {
+                    credit -= totalCost;
+                    localStorage.setItem('credit', credit);
+                    alert('Acquisto completato con successo!');
+                } else {
+                    alert('Credito insufficiente. Si prega di caricare più soldi.');
+                }
+                document.getElementById('credit').innerText = `Credito: €${credit}`;
+            }
+    </script>
+</head>
+<body onload="loadCredit()">
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>Acquisto Biglietti Partite</h1>
+        <p id="credit">Credito: €0</p>
+        <div class="card bg-dark p-4 rounded shadow">
+            <h2 class="text-white">Dettagli dell'Ordine</h2>
+            <form onsubmit="purchaseTicket(event)">
+                <div class="form-group">
+                    <label for="name" class="text-white">Nome:</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="text-white">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="match" class="text-white">Partita:</label>
+                    <select id="match" name="match" class="form-control">
+                        <option value="milan_vs_inter">Milan vs Inter</option>
+                        <option value="milan_vs_juventus">Milan vs Juventus</option>
+                        <option value="milan_vs_napoli">Milan vs Napoli</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity" class="text-white">Quantità biglietti:</label>
+                    <input type="number" id="quantity" name="quantity" class="form-control" min="1" max="10" required>
+                </div>
+                <input type="submit" value="Conferma Acquisto" class="btn btn-danger btn-block">
+            </form>
+        </div>
+        <div class="link my-4">
+            <button class="btn btn-primary" onclick="window.location.href='caricoCredito.html'">Carica Credito</button>
+        </div>
+        <button class="btn btn-secondary" onclick="window.location.href='page.html'">Torna alla Home</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
