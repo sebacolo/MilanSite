@@ -1,25 +1,45 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
-namespace MilanSite.Controllers
+namespace milanSite.Controllers
 {
-    public void ConfigureServices(IServiceCollection services)
+    public class HomeController : Controller
     {
-        services.AddControllers();
-    }
-
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-        if (env.IsDevelopment())
+        // Azione per la pagina principale
+        public IActionResult Index()
         {
-            app.UseDeveloperExceptionPage();
+            return View();
         }
 
-        app.UseRouting();
-
-        app.UseEndpoints(endpoints =>
+        // Azione per la pagina formazione
+        public IActionResult Formazione()
         {
-            endpoints.MapControllers();
-        });
-    }
+            return View();
+        }
 
+        // Altre azioni per le altre pagine
+        public IActionResult PurchaseTickets()
+        {
+            return View();
+        }
+
+        public IActionResult Purchase()
+        {
+            return View();
+        }
+
+        public IActionResult CaricoCredito()
+        {
+            return View();
+        }
+
+        public IActionResult Trofei()
+        {
+            return View();
+        }
+
+        public IActionResult PurchaseTicket()
+        {
+            return View();
+        }
+    }
 }
